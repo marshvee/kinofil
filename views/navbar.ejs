@@ -1,8 +1,13 @@
 <nav class="light-blue lighten-1" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Kinofil</a>
         <ul class="right hide-on-med-and-down">
+            <% if (login) {%>
+            <li><a href="/me">Profile</a></li>
+            <li><a href="/logout">Log out</a></li>
+            <% } else { %>
             <li><a href="/signup">Sign up</a></li>
             <li><a href="/login">Log in</a></li>
+            <% } %>
         </ul>
 
         <ul id="nav-mobile" class="sidenav">

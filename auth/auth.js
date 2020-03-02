@@ -18,6 +18,12 @@ exports.ensureAuthenticated = (req, res, next) => {
 	res.redirect("/login");
 };
 
+exports.ensureNotAuthenticated = (req, res, next) => {
+	if (!req.isAuthenticated()) return next();
+	req.session.error = "You are already logged in!";
+	res.redirect("/x");
+};
+
 exports.login = function (req, username, password, done) {
 	// check in mongo if a user with username exists or not
 	MongoUtils.findOne(
