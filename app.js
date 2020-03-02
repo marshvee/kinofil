@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(flash());
-app.use(session({ secret: secretFile.secretKey }));
+app.use(session({ secret: secretFile.secretKey, saveUninitialized: true, resave: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
