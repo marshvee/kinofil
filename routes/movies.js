@@ -2,19 +2,30 @@ var express = require("express");
 var MongoUtils = require("../db/MongoUtils.js");
 var router = express.Router();
 const colName = "Movies";
+
+const buildQuery = (query) => ({
+	title: new RegExp(`.*${query}.*`, "i")
+});
+
 /* GET movies listing. */
 router.get("/", function (req, res) {
-
-	MongoUtils.findMany((movies) => {
-		res.render("movies", { movies });
-	}, colName);
-
+	if (req.query.search) {
+		const query = buildQuery(req.query.search);
+		console.log(query, "buscarMONGO");
+		MongoUtils.findMany((movies) => {
+			res.render("movies", { movies });
+		}, colName, query);
+	} else {
+		MongoUtils.findMany((movies) => {
+			res.render("movies", { movies });
+		}, colName);
+	}
 });
 
 /* GET movies search. */
-router.get("/search/:name", function (req, res) {
-	let nombre= new RegExp(`.*${req.params.name}.*`,"i");
-	let query={"title": nombre};
+router.get("/search/:title", function (req, res) {
+	let title = new RegExp(`.*${req.params.title}.*`, "i");
+	let query = { "title": title };
 	console.log(query, "buscarMONGO")
 	MongoUtils.findMany((movies) => {
 		res.json(movies);

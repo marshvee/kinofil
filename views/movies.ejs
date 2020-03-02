@@ -16,17 +16,13 @@
 </head>
 
 <body>
-	
-
 	<%- include("./navbar.ejs") %>
 
-	<h1 class="page-title">Movies:</h1>
 	<div class="section no-pad-bot" id="index-banner">
-		<div class="container" >
+		<div class="container">
 			<%- include("./search.ejs") %>
 
-			<br><br>
-			<div class="row"  id="movies-list">
+			<div class="row" id="movies-list">
 				<% 
 				let i = 1;
 				movies.forEach( (movie) =>{
@@ -35,18 +31,20 @@
 				let idTitle="title-"+i;
 				%>
 
-				<div class="col s2 m4">
+				<div class="col s2 m3">
 					<a href="/movies/<%=movie._id %>">
-						<div class="card movies-card">
+						<div class="movies-card card">
 
 							<div class="card-image">
 								<img class="movie-image" src=<%=movie.poster %> height="100%" width="100%" />
-
-								<span class="card-title descrip" id=<%= idCon %>><%= movie.overview.substring(0,200) %>
+								<% if (movie.overview.length > 190) { %>
+								<span class="descrip card-title" id=<%= idCon %>><%= movie.overview.substring(0,190) %>
 									...
 								</span>
-
-								<span class="card-title movie-title" id=<%= idTitle %>><%= movie.title%></span>
+								<% } else { %>
+								<span class="descrip card-title" id=<%= idCon %>><%= movie.overview %></span> </span>
+								<% } %>
+								<span class="movie-title card-title" id=<%= idTitle %>><%= movie.title%></span>
 								<% i+=1; %>
 								<a class="btn-floating halfway-fab waves-effect waves-light orange"><i
 										class="material-icons">add</i></a>
@@ -59,7 +57,7 @@
 			</div>
 			<br><br>
 
-			
+
 		</div>
 	</div>
 	
