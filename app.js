@@ -6,8 +6,6 @@ var logger = require("morgan");
 var flash = require("connect-flash");
 var session = require("express-session");
 var passport = require("./auth/passport.js");
-var secretFile = require("./credenciales.json");
-
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var moviesRouter = require("./routes/movies");
@@ -25,7 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(flash());
-app.use(session({ secret: secretFile.secretKey }));
+app.use(session({ secret: process.env.secret }));
 app.use(passport.initialize());
 app.use(passport.session());
 

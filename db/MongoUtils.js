@@ -4,10 +4,8 @@ const fs = require("fs");
 function MongoUtils() {
 
 	const mu = {},
-		credenciales = fs.readFileSync("../credenciales.json"),
-		jsonContent = JSON.parse(credenciales),
 		dbName = "MoviesReviews",
-		uri = `mongodb+srv://${jsonContent.usuario}:${jsonContent.clave}@cluster0-h9ykn.mongodb.net/${dbName}?retryWrites=true&w=majority`;
+		uri = `mongodb+srv://${process.env.usuario}:${process.env.clave}@cluster0-h9ykn.mongodb.net/${dbName}?retryWrites=true&w=majority`;
 
 
 
