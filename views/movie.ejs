@@ -56,9 +56,9 @@
 						<div class="card-action">
 							<span class="watched">
 								<% if (login && user.watched && user.watched.includes(`${movie._id}`)) { %>
-								<button class="btn" id="rem-watched">Remove from watched</button>
+								<button class="btn orange" id="rem-watched">Remove from watched</button>
 								<% } else if (login) { %>
-								<button class="btn" id="add-watched">Add to watched</button>
+								<button class="btn orange" id="add-watched">Add to watched</button>
 								<% } else { %>
 								<button data-target="login-dialog" class="btn modal-trigger" id="none-watched">Add to
 									watched</button>
@@ -66,9 +66,9 @@
 							</span>
 							<span class="watchlist">
 								<% if (login &&  user.watchlist && user.watchlist.includes(`${movie._id}`)) { %>
-								<button class="btn" id="rem-watchlist">Remove from watchlist</button>
+								<button class="btn orange" id="rem-watchlist">Remove from watchlist</button>
 								<% } else if (login) { %>
-								<button class="btn" id="add-watchlist">Add to watchlist</button>
+								<button class="btn orange" id="add-watchlist">Add to watchlist</button>
 								<% } else { %>
 								<button data-target="login-dialog" class="btn modal-trigger" id="none-watchlist">Add to
 									watchlist</button>
@@ -76,9 +76,9 @@
 							</span>
 							<span class="watching">
 								<% if (login &&  user.watching && user.watching.includes(`${movie._id}`)) { %>
-								<button class="btn" id="rem-watching">Remove from watching</button>
+								<button class="btn orange" id="rem-watching">Remove from watching</button>
 								<% } else if (login) { %>
-								<button class="btn" id="add-watching">Add to watching</button>
+								<button class="btn orange" id="add-watching">Add to watching</button>
 								<% } else { %>
 								<button data-target="login-dialog" class="btn modal-trigger" id="none-watching">Add to
 									watching</button>
@@ -87,9 +87,9 @@
 							<br><br>
 							<span class="favorites">
 								<% if (login &&  user.favorites && user.favorites.includes(`${movie._id}`)) { %>
-								<button class="btn" id="rem-favorites">Remove from favorites</button>
+								<button class="btn orange" id="rem-favorites">Remove from favorites</button>
 								<% } else if (login) { %>
-								<button class="btn" id="add-favorites">Add to favorites</button>
+								<button class="btn orange" id="add-favorites">Add to favorites</button>
 								<% } else { %>
 								<button data-target="login-dialog" class="btn modal-trigger" id="none-favorites">Add to
 									favorites</button>

@@ -33,7 +33,6 @@ function action(toDo, listName, username, movieId) {
 
 function generateOnClick(toDo, listName) {
 	if (toDo == "none") return () => {
-		console.log("holi");
 	};
 	if (toDo == "add" || toDo == "rem") return () => {
 		let username = document.querySelector(".username").id;

@@ -7,7 +7,7 @@ function toogleTitle(card, pDisplay) {
 	let num = card.id.split("-")[1];
 	let idTitle = "title-" + num;
 	let title = document.getElementById(idTitle);
-	if (title) title.style.opacity = pDisplay;
+	if (title){ title.style.opacity = pDisplay;}
 }
 
 function titles(path, opa) {
@@ -42,13 +42,11 @@ const clickModal = (e) => {
 	let idButton = e.target.id;
 	let idMovie = idButton.split("-");
 	currentMovie = idMovie[1];
-	console.log(currentMovie);
 }
 
 const reviewMovieStar = (e) => {
 	let idstar = e.target.id;
 	let reviewV = idstar.split("-")[1]
-	console.log(reviewV, currentMovie, 'ACAAAAAAAAAAAAAAA')
 	postData(`/movies/review/`, { movie: currentMovie, review: reviewV })
 		.then((data) => {
 			$('#modal1').modal('close');

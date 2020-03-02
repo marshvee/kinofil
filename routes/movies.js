@@ -11,7 +11,6 @@ const buildQuery = (query) => ({
 router.get("/", function (req, res) {
 	if (req.query.search) {
 		const query = buildQuery(req.query.search);
-		console.log(query, "buscarMONGO");
 		MongoUtils.findMany((movies) => {
 			res.render("movies", { movies });
 		}, colName, query);
@@ -32,7 +31,6 @@ router.get("/:id", function (req, res) {
 router.get("/search/:title", function (req, res) {
 	let title = new RegExp(`.*${req.params.title}.*`, "i");
 	let query = { "title": title };
-	console.log(query, "buscarMONGO")
 	MongoUtils.findMany((movies) => {
 		res.json(movies);
 	}, colName, query);
@@ -43,8 +41,6 @@ router.post("/review",
 	function (req, res) {
 		let review = req.body.review;
 		let movie = req.body.movie;
-		console.log(review, "review");
-		console.log(movie, "MOVIE");
 		MongoUtils.postReview((x) => {
 			res.json({ status: 'OK' });
 		}, colName, review, movie);

@@ -37,16 +37,13 @@ const onSearch = (event) => {
 
 	const query = document.querySelector("#formSearch input").value;
 	if (query) {
-		console.log(query, 'QUErY');
 		fetch(`/movies/search/${query}`)
 			.then(res => res.json())
 			.then(movies => {
-				console.log("llegaron las movies", movies);
 				displayMovies(movies);
 			});
 	}
 	else {
-		console.log(query, 'QUERY');
 		window.location.href = "/movies";
 	}
 	event.preventDefault();
