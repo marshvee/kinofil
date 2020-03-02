@@ -38,6 +38,8 @@ const displayMovies = (movies) => {
 const onSearch = (event) => {
 
   const query = document.querySelector("#formSearch input").value;
+  if (query)
+  {
   console.log(query, 'QUEY');
   fetch(`/movies/search/${query}`)
     .then(res => res.json())
@@ -45,7 +47,11 @@ const onSearch = (event) => {
       console.log("llegaron las movies", movies);
       displayMovies(movies);
     });
-
+  }
+  else{
+    console.log(query, 'QUEY');
+    window.location.href="/movies";
+  }
   event.preventDefault();
 }
 

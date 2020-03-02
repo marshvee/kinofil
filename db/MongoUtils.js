@@ -5,7 +5,7 @@ function MongoUtils() {
 
 	const mu = {},
 		dbName = "MoviesReviews",
-		uri = `mongodb+srv://${process.env.usuario}:${process.env.clave}@cluster0-h9ykn.mongodb.net/${dbName}?retryWrites=true&w=majority`;
+		uri = `mongodb+srv://${(process.env.usuario)}:${(process.env.clave)}@cluster0-h9ykn.mongodb.net/${dbName}?retryWrites=true&w=majority`;
 
 
 
