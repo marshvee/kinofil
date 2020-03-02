@@ -1,6 +1,9 @@
 const mongodb = require("mongodb");
 const fs = require("fs");
 
+process.env.usuario = "Mariana";
+process.env.clave = "desarrollouniandes2020";
+
 function MongoUtils() {
 
 	const mu = {},
@@ -14,7 +17,7 @@ function MongoUtils() {
 		client.connect(err => {
 			if (err) throw err;
 			const collection = client.db(dbName).collection(colName);
-			
+
 			if (query) {
 				collection.find(query).toArray((err, list) => {
 					if (err) throw err;
@@ -68,7 +71,7 @@ function MongoUtils() {
 		client.connect(err => {
 			if (err) throw err;
 			console.log(id, "ID");
-			if (id == undefined) {
+			if (id == undefined || !mongodb.ObjectId.isValid(id)) {
 				throw new Error("ID can't be null or udefined");
 			}
 			const o_id = new mongodb.ObjectID(id);
@@ -105,23 +108,47 @@ function MongoUtils() {
 		});
 	};
 
-	mu.postReview=(cbk, colName, review, movie)=>{
-		
+	mu.postReview = (cbk, colName, review, movie) => {
+
 		const client = new mongodb.MongoClient(uri, { useNewUrlParser: true });
 
 		client.connect(err => {
-			if (err) throw err; 
+			if (err) throw err;
 			const collection = client.db(dbName).collection(colName);
-			collection.updateOne({_id: new mongodb.ObjectID(movie)},{$push:{reviews:review}}, 
-				(err,result)=>{
+			collection.updateOne({ _id: new mongodb.ObjectID(movie) }, { $push: { reviews: review } },
+				(err, result) => {
 					if (err) throw err;
 					cbk(result);
 					client.close();
 				}
-				)
-			
+
+			)
+
 		});
 	}
+
+	mu.updateOne = (cbk, colName, object, update) => {
+		const client = new mongodb.MongoClient(uri, { useNewUrlParser: true });
+		client.connect(err => {
+			if (err) throw err;
+			console.log(object, "OBJECT");
+			if (object == undefined) {
+				throw new Error("Object can't be null or udefined");
+			}
+			const collection = client.db(dbName).collection(colName);
+			collection.updateOne(
+				object,
+				update,
+				(err, result) => {
+
+
+
+					if (err) throw err;
+					cbk(result);
+					client.close();
+				});
+		});
+	};
 
 	return mu;
 

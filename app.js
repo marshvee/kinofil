@@ -30,6 +30,10 @@ app.use(passport.session());
 // Check if user is logged in
 app.use(function (req, res, next) {
 	res.locals.login = req.isAuthenticated();
+	if (req.user) {
+		res.locals.user = req.user;
+		console.log(res.locals.user);
+	}
 	next();
 });
 
