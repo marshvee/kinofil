@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <link href="stylesheets/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movies</title>
+</head>
+
+<body>
+    <!--NAVBAR-->
+    <nav class="light-blue lighten-1" role="navigation">
+        <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">MovieHub</a>
+         
+          <a href="/" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        </div>
+      </nav>
+
+
+      <div class="section no-pad-bot" id="index-banner">
+        <div class="container">
+          <br><br>
+          <div class="row">
+          <% 
+          let i =1;
+          movies.forEach( (movie) =>{
+              
+          let idCon="contenedor-"+i;
+          let idTitle="title-"+i;
+          %>
+            
+                <div class="col s2 m4">
+                    <div class="card " >
+                        
+                        <div class="card-image" >
+                            <img class="movie-image" src=<%=movie.poster %> height="100%" width="100%"/>
+                                
+                                <span class="card-title descrip" id= <%= idCon %> ><%=movie.overview.substring(0,200) %> ...  </span>
+                            
+                            <span class="card-title movie-title" id= <%= idTitle %>><%= movie.title%></span>
+                            <% i+=1;%>
+                            <a class="btn-floating halfway-fab waves-effect waves-light orange"><i
+                                class="material-icons">add</i></a>
+                        </div>
+                        
+                       
+                    </div>
+                </div>
+            
+            <%}  )%>
+        </div>
+          <br><br>
+    
+        </div>
+      </div>
+    <script type="text/javascript" src="javascripts/movies.js"></script>
+</body>
+
+</html>
