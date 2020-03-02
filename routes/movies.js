@@ -1,28 +1,27 @@
 var express = require("express");
-const MongoUtils = require("../db/MongoUtils.js");
+var MongoUtils = require("../db/MongoUtils.js");
 var router = express.Router();
 const colName = "Movies";
 /* GET movies listing. */
 router.get("/", function (req, res) {
 
-	MongoUtils.find((movies) => {
+	MongoUtils.findMany((movies) => {
 		res.render("movies", { movies });
-
 	}, colName);
 
 });
 /* GET movie detail */
 router.get("/:id", function (req, res) {
 
-	MongoUtils.findById((movies) => {
-		res.render("movie", { movie: movies[0] });
+	MongoUtils.findById((movie) => {
+		res.render("movie", { movie });
 	}, colName, req.params.id);
 
 });
-/*HACER ESTO*/
-router.post("/:id/comment", function (req, res) {
+/* POST movie review */
+router.post("/:id/reviews", function (req, res) {
 
-	MongoUtils.find((list) => {
+	MongoUtils.findMany((list) => {
 		res.send(list);
 	}, colName);
 
