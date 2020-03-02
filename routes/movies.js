@@ -31,6 +31,19 @@ router.get("/search/:title", function (req, res) {
 		res.json(movies);
 	}, colName, query);
 });
+
+/* POST review  */
+router.post("/review", function (req, res) {
+
+	let review= req.body.review
+	let movie= req.body.movie
+	console.log(review, "review")
+	console.log(movie, "MOVIE")
+	MongoUtils.postReview((x) => {
+		res.json({status:'OK'});
+	}, colName, review, movie);
+
+});
 /* GET movie detail */
 router.get("/:id", function (req, res) {
 	MongoUtils.findById((movie) => {

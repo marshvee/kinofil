@@ -29,6 +29,8 @@
 					
 				let idCon="contenedor-"+i;
 				let idTitle="title-"+i;
+				
+				let idModal="modal-"+movie._id;
 				%>
 
 				<div class="col s2 m3">
@@ -38,7 +40,7 @@
 							<div class="card-image">
 								<img class="movie-image" src=<%=movie.poster %> height="100%" width="100%" />
 								<% if (movie.overview.length > 190) { %>
-								<span class="descrip card-title" id=<%= idCon %>><%= movie.overview.substring(0,190) %>
+								<span class="descrip card-title" id=<%= idCon %>><%= movie.overview.substring(0,120) %>
 									...
 								</span>
 								<% } else { %>
@@ -46,12 +48,46 @@
 								<% } %>
 								<span class="movie-title card-title" id=<%= idTitle %>><%= movie.title%></span>
 								<% i+=1; %>
+								<a href="#modal1"
+									class="btn-floating halfway-fab waves-effect waves-light orange modal-trigger tooltipped"
+									data-tooltip="Add a review"><i class="material-icons" id=<%= idModal %>>add</i></a>
+
+
 							</div>
 						</div>
 					</a>
 				</div>
 
 				<%}  )%>
+			</div>
+
+			<div id="modal1" class="modal">
+				<div class="modal-content">
+					<h4>Review</h4>
+					<div class="row">
+						<div class="col s2 m2">
+							<a class="btn-floating  waves-effect waves-light yellow tooltipped star" data-tooltip="1"><i
+									id="star-1" class="material-icons">stars</i></a>
+						</div>
+						<div class="col s2 m2">
+							<a class="btn-floating  waves-effect waves-light yellow tooltipped star" data-tooltip="2"><i
+									id="star-2" class="material-icons">stars</i></a>
+						</div>
+						<div class="col s2 m2">
+							<a class="btn-floating  waves-effect waves-light yellow tooltipped star" data-tooltip="3"><i
+									id="star-3" class="material-icons">stars</i></a>
+						</div>
+						<div class="col s2 m2">
+							<a class="btn-floating  waves-effect waves-light yellow tooltipped star" data-tooltip="4"><i
+									id="star-4" class="material-icons">stars</i></a>
+						</div>
+						<div class="col s2 m2">
+							<a class="btn-floating  waves-effect waves-light yellow tooltipped star" data-tooltip="5"><i
+									id="star-5" class="material-icons">stars</i></a>
+						</div>
+
+					</div>
+				</div>
 			</div>
 			<br><br>
 
