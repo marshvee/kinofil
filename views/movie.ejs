@@ -47,21 +47,21 @@
 				<div class="col s6 m8">
 					<div class="card white ">
 						<div class="card-content ">
-						  <span class="card-title"><%= movie.title %></span>
-						  <p><%= movie.overview %></p>
+							<span class="card-title"><%= movie.title %></span>
+							<p><%= movie.overview %></p>
 						</div>
 						<div class="card-action">
-						  <a href="#">Add to watched</a>
-						  <a href="#">Add to wishlist</a>
+							<a href="#">Add to watched</a>
+							<a href="#">Add to wishlist</a>
+
+							<a href="/"+<% movie.id %>+"/comments/">Write a review</a>
 						</div>
+
+
+					</div>
 				</div>
-
-
-
-
-			</div>
-		</div>
-		<script type="text/javascript" src="javascripts/movies.js"></script>
+				<script type="text/javascript" src="javascripts/movies.js"></script>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 
 </html>
