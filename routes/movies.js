@@ -23,9 +23,10 @@ router.get("/", function (req, res) {
 });
 
 /* GET movies search. */
-router.get("/search/:query", function (req, res) {
-	const query = buildQuery(req.params.query);
-	console.log(query, "buscarMONGO");
+router.get("/search/:title", function (req, res) {
+	let title = new RegExp(`.*${req.params.title}.*`, "i");
+	let query = { "title": title };
+	console.log(query, "buscarMONGO")
 	MongoUtils.findMany((movies) => {
 		res.json(movies);
 	}, colName, query);
@@ -48,3 +49,4 @@ router.post("/:id/reviews", function (req, res) {
 });
 
 module.exports = router;
+

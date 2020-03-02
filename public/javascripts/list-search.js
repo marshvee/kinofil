@@ -36,25 +36,22 @@ const displayMovies = (movies) => {
 };
 
 const onSearch = (event) => {
+
 	const query = document.querySelector("#formSearch input").value;
-	console.log(query, "QUERY");
-	if (query !== "") {
+	if (query) {
+		console.log(query, 'QUErY');
 		fetch(`/movies/search/${query}`)
 			.then(res => res.json())
 			.then(movies => {
+				console.log("llegaron las movies", movies);
 				displayMovies(movies);
 			});
-
-		event.preventDefault();
-	} else {
-		fetch("/movies")
-			.then(res => res.json())
-			.then(movies => {
-				displayMovies(movies);
-			});
-
-		event.preventDefault();
 	}
-};
+	else {
+		console.log(query, 'QUERY');
+		window.location.href = "/movies";
+	}
+	event.preventDefault();
+}
 
 formSearch.addEventListener("submit", onSearch);

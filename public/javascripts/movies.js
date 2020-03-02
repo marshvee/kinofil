@@ -23,6 +23,7 @@ function titles(path, opa) {
 for (var movie of movies) {
 	movie.onmouseover = (e) => {
 		/*titles(e.path,'0');*/
+<<<<<<< HEAD
 		toogleTitle(e.target, "0");
 	};
 	movie.onmouseout = (e) => {
@@ -30,3 +31,14 @@ for (var movie of movies) {
 		toogleTitle(e.target, "1");
 	};
 }
+=======
+		toogleTitle(e.target,"0");
+	};
+	movie.onmouseout = (e)=>{
+		/*titles(e.path,'1');*/
+		toogleTitle(e.target,"1");
+	};
+}
+
+
+>>>>>>> b015f68c9abce79c2169bcd0b50614b3fa646479
