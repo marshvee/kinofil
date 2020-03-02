@@ -30,9 +30,11 @@ for( var movie of movies)
 	movie.onmouseover = (e)=>{
 		/*titles(e.path,'0');*/
 		toogleTitle(e.target,"0");
-	}
+	};
 	movie.onmouseout = (e)=>{
 		/*titles(e.path,'1');*/
 		toogleTitle(e.target,"1");
-	}
+	};
 }
+
+

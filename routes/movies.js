@@ -13,7 +13,7 @@ router.get("/", function (req, res) {
 
 /* GET movies search. */
 router.get("/search/:name", function (req, res) {
-	let nombre= new RegExp(`.*${req.params.trim()}.*`,"i");
+	let nombre= new RegExp(`.*${req.params.name}.*`,"i");
 	let query={"title": nombre};
 	console.log(query, "buscarMONGO")
 	MongoUtils.findMany((movies) => {

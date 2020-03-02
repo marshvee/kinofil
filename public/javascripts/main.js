@@ -1,1 +1,4 @@
-alert("holii");
+$(document).ready(function(){
+    $('.sidenav').sidenav();
+  });
+        
