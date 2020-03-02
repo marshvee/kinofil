@@ -17,6 +17,8 @@ var app = express();
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
+process.env.secret = "webuniandes2020";
+
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -30,6 +32,10 @@ app.use(passport.session());
 // Check if user is logged in
 app.use(function (req, res, next) {
 	res.locals.login = req.isAuthenticated();
+	if (req.user) {
+		res.locals.user = req.user;
+		console.log(res.locals.user);
+	}
 	next();
 });
 

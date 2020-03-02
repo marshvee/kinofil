@@ -21,7 +21,12 @@ exports.ensureAuthenticated = (req, res, next) => {
 exports.ensureNotAuthenticated = (req, res, next) => {
 	if (!req.isAuthenticated()) return next();
 	req.session.error = "You are already logged in!";
-	res.redirect("/x");
+	res.redirect("/");
+};
+
+exports.confirmAuthorization = (req, res, next) => {
+	if (req.user.username === req.params.username) return next();
+	req.session.error = "You aren't authorized to do this!";
 };
 
 exports.login = function (req, username, password, done) {
