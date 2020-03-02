@@ -23,7 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(flash());
-app.use(session({ secret: process.env.secret }));
+app.use(session({ secret: process.env.secretKey }));
 app.use(passport.initialize());
 app.use(passport.session());
 
