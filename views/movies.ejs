@@ -20,9 +20,11 @@
 
 	<h1 class="page-title">Movies:</h1>
 	<div class="section no-pad-bot" id="index-banner">
-		<div class="container" id="movies-list">
+		<div class="container" >
+			<%- include("./search.ejs") %>
+
 			<br><br>
-			<div class="row">
+			<div class="row"  id="movies-list">
 				<% 
 				let i = 1;
 				movies.forEach( (movie) =>{
@@ -58,6 +60,7 @@
 			
 		</div>
 	</div>
+	<script src="javascripts/list-search.js"></script>
 	<script type="text/javascript" src="javascripts/movies.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>

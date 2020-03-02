@@ -10,9 +10,18 @@ router.get("/", function (req, res) {
 	}, colName);
 
 });
+
+/* GET movies search. */
+router.get("/search/:name", function (req, res) {
+	let query={"title": req.params.name};
+	console.log(query, "buscarMONGO")
+	MongoUtils.findMany((movies) => {
+		res.json(movies);
+	}, colName, query);
+
+});
 /* GET movie detail */
 router.get("/:id", function (req, res) {
-
 	MongoUtils.findById((movie) => {
 		res.render("movie", { movie });
 	}, colName, req.params.id);

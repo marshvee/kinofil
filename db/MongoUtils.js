@@ -16,7 +16,7 @@ function MongoUtils() {
 		client.connect(err => {
 			if (err) throw err;
 			const collection = client.db(dbName).collection(colName);
-			console.log(query, "QUERY");
+			
 			if (query) {
 				collection.find(query).toArray((err, list) => {
 					if (err) throw err;
