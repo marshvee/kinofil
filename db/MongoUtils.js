@@ -1,4 +1,4 @@
-const MongoClient = require("mongodb").MongoClient;
+const mongodb = require("mongodb");
 const fs = require("fs");
 
 function MongoUtils() {
@@ -12,7 +12,7 @@ function MongoUtils() {
 
 
 	mu.find = (cbk, colName, query) => {
-		const client = new MongoClient(uri, { useNewUrlParser: true });
+		const client = new mongodb.MongoClient(uri, { useNewUrlParser: true });
 		client.connect(err => {
 			if (err) throw err;
 			const collection = client.db(dbName).collection(colName);
@@ -35,6 +35,25 @@ function MongoUtils() {
 			}
 		});
 	};
+
+	mu.findById = (cbk, colName, id) => {
+		const client = new mongodb.MongoClient(uri, { useNewUrlParser: true });
+		client.connect(err => {
+			if (err) throw err;
+			console.log(id, "ID");
+			if (id == undefined) {
+				throw new Error("ID can't be null or udefined");
+			}
+			const o_id = new mongodb.ObjectID(id);
+			const collection = client.db(dbName).collection(colName);
+			collection.find({ _id: o_id }).toArray((err, list) => {
+				if (err) throw err;
+				cbk(list);
+				client.close();
+			});
+		});
+	};
+
 	return mu;
 
 }
