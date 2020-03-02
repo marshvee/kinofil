@@ -5,13 +5,13 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var flash = require("connect-flash");
 var session = require("express-session");
-var passport = require("./auth/passport");
-var secretFile = require("./credenciales.json");
+var passport = require("./auth/passport.js");
+var secretFile = require("../credenciales.json");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var moviesRouter = require("./routes/movies");
-var loginRouter = require("./routes/login");
+var authRouter = require("./routes/authentication");
 
 var app = express();
 
@@ -29,10 +29,16 @@ app.use(session({ secret: secretFile.secretKey }));
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Check if user is logged in
+app.use(function (req, res, next) {
+	res.locals.login = req.isAuthenticated();
+	next();
+});
+
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/movies", moviesRouter);
-app.use("/", loginRouter(passport));
+app.use("/", authRouter(passport));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

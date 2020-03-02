@@ -1,5 +1,6 @@
 var express = require("express");
 var router = express.Router();
+var auth = require("../auth/auth.js");
 
 module.exports = function (passport) {
 	/* GET users listing. */
@@ -7,7 +8,7 @@ module.exports = function (passport) {
 		res.render("login", { message: req.flash("message") });
 	});
 
-	router.post("/login",
+	router.post("/login", auth.ensureNotAuthenticated,
 		passport.authenticate("login", {
 			successRedirect: "/movies",
 			failureRedirect: "/login",
@@ -19,13 +20,18 @@ module.exports = function (passport) {
 		res.render("signup", { message: req.flash("message") });
 	});
 
-	router.post("/signup",
+	router.post("/signup", auth.ensureNotAuthenticated,
 		passport.authenticate("signup", {
 			successRedirect: "/movies",
 			failureRedirect: "/signup",
 			failureFlash: true
 		})
 	);
+
+	router.get("/logout", auth.ensureAuthenticated, function (req, res) {
+		req.logout();
+		res.redirect("/");
+	});
 
 	return router;
 };
