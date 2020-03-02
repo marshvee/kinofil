@@ -34,54 +34,95 @@
 
 			<div class="row">
 				<div class="col s6 m4">
-					<div class="card-image ">
+					<div class="card-image">
 						<img src=<%=movie.poster %> height="500pt">
 					</div>
 				</div>
 
 				<div class="col s6 m8">
-					<div class="card white ">
-						<div class="card-content ">
+					<div class="card white">
+						<div class="card-content" id=<%=movie._id %>>
 							<span class="card-title"><%= movie.title %></span>
+							<p>Original title: <%= movie.original_title %></p>
+							<p>Release date: <%= movie.release_date %></p>
 							<p><%= movie.overview %></p>
 						</div>
 						<div class="card-action">
-							<% if (login && user.watched.includes(`${movie._id}`)) { %>
-							<a id="rem-watched">Remove from watched</a>
-							<% } else { %>
-							<a id="add-watched">Add to watched</a>
+							<span class="watched">
+								<% if (login && user.watched.includes(`${movie._id}`)) { %>
+								<button class="btn" id="rem-watched">Remove from watched</button>
+								<% } else if (login) { %>
+								<button class="btn" id="add-watched">Add to watched</button>
+								<% } else { %>
+								<button data-target="login-dialog" class="btn modal-trigger" id="none-watched">Add to
+									watched</button>
+								<% } %>
+							</span>
+							<span class="watchlist">
+								<% if (login && user.watchlist.includes(`${movie._id}`)) { %>
+								<button class="btn" id="rem-watchlist">Remove from watchlist</button>
+								<% } else if (login) { %>
+								<button class="btn" id="add-watchlist">Add to watchlist</button>
+								<% } else { %>
+								<button data-target="login-dialog" class="btn modal-trigger" id="none-watchlist">Add to
+									watchlist</button>
+								<% } %>
+							</span>
+							<span class="watching">
+								<% if (login && user.watching.includes(`${movie._id}`)) { %>
+								<button class="btn" id="rem-watching">Remove from watching</button>
+								<% } else if (login) { %>
+								<button class="btn" id="add-watching">Add to watching</button>
+								<% } else { %>
+								<button data-target="login-dialog" class="btn modal-trigger" id="none-watching">Add to
+									watching</button>
+								<% } %>
+							</span>
+							<span class="favorites">
+								<% if (login && user.favorites.includes(`${movie._id}`)) { %>
+								<button class="btn" id="rem-favorites">Remove from favorites</button>
+								<% } else if (login) { %>
+								<button class="btn" id="add-favorites">Add to favorites</button>
+								<% } else { %>
+								<button data-target="login-dialog" class="btn modal-trigger" id="none-favorites">Add to
+									favorites</button>
+								<% } %>
+							</span>
+
+							<% if (login) { %>
+							<span class="username" id=<%= user.username %>> </span>
 							<% } %>
 
-							<% if (login && user.watchlist.includes(`${movie._id}`)) { %>
-							<a id="rem-watchlist">Remove from watchlist</a>
-							<% } else { %>
-							<a id="add-watchlist">Add to watchlist</a>
-							<% } %>
-
-							<% if (login && user.watching.includes(`${movie._id}`)) { %>
-							<a id="rem-watching">Remove from watching</a>
-							<% } else { %>
-							<a id="add-watching">Add to watching</a>
-							<% } %>
-
-
-							<% if (login && user.favorites.includes(`${movie._id}`)) { %>
-							<a id="rem-favorites">Remove from favorites</a>
-							<% } else { %>
-							<a id="add-favorites">Add to favorites</a>
-							<% } %>
-
-							<a href="#">Write a review</a>
+							<!-- Modal Structure -->
+							<div id="login-dialog" class="modal">
+								<div class="modal-content">
+									<h4>Ooops! Seems you can't do this :(</h4>
+									<p>
+										In order to use this function you need to have an account with us and log in
+										to
+										it.
+									</p>
+								</div>
+								<div class="modal-footer">
+									<a href="/login"
+										class=" modal-action modal-close waves-effect waves-green btn-flat">Login</a>
+									<a href="/signup"
+										class=" modal-action modal-close waves-effect waves-green btn-flat">Signup</a>
+									<a href="#"
+										class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+								</div>
+							</div>
 						</div>
-
 
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<script type="text/html" src="javascripts/movie.js"></script>
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="../javascripts/main.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	<script src="../javascripts/movie.js"></script>
 </body>
 
 </html>

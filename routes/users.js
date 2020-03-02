@@ -26,16 +26,19 @@ router.put("/:username",
 	function (req, res) {
 		let movieId = req.body.movieId;
 		let listName = req.body.listName;
+		let toDo = req.body.toDo;
 		MongoUtils.findById((movie) => {
 			let list = {};
 			list[listName] = movieId;
+			if (toDo == "add") update = { $push: list };
+			else if (toDo == "rem") update = { $pull: list };
 
 			MongoUtils.updateOne((user) => {
 				res.send(user);
 			},
 				colName,
 				{ username: req.params.username },
-				{ $push: list }
+				update
 			);
 		},
 			"Movies",

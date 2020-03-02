@@ -30,14 +30,12 @@ router.get("/search/:title", function (req, res) {
 	MongoUtils.findMany((movies) => {
 		res.json(movies);
 	}, colName, query);
-
 });
 /* GET movie detail */
 router.get("/:id", function (req, res) {
 	MongoUtils.findById((movie) => {
 		res.render("movie", { movie });
 	}, colName, req.params.id);
-
 });
 /* POST movie review */
 router.post("/:id/reviews", function (req, res) {
