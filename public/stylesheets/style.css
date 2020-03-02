@@ -3,12 +3,23 @@
 	width: 100%;
 	height: 95vh;
 	display: table;
-	background: #4ECDC4;
+	background: #29b6f6;
 	vertical-align: middle;
 }
 
 #login-card, #alert {
   max-width: 400px;
+}
+
+.input-field .btn {
+  background-color: #ff9800;
+}
+
+.input-field #username:focus,
+.input-field #password:focus,
+.input-field #email:focus {
+  border-bottom: 1px solid #ff9800;
+  box-shadow: 0 1px 0 0 #ff9800;
 }
 
 .card-image {
@@ -69,13 +80,13 @@ transition: all 400ms ease-out;
 .breadcrumb {
   padding: 1%;
 }
+
 .card {
   box-shadow: none;
 }
 
 .page-title {
   text-align: center;
-
   font-size: 500%;
   color: cadetblue;
   margin: 1%
