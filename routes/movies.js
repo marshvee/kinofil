@@ -21,6 +21,12 @@ router.get("/", function (req, res) {
 		}, colName);
 	}
 });
+/* GET movie detail */
+router.get("/:id", function (req, res) {
+	MongoUtils.findById((movie) => {
+		res.render("movie", { movie });
+	}, colName, req.params.id);
+});
 
 /* GET movies search. */
 router.get("/search/:title", function (req, res) {
@@ -33,31 +39,17 @@ router.get("/search/:title", function (req, res) {
 });
 
 /* POST review  */
-router.post("/review", function (req, res) {
+router.post("/review",
+	function (req, res) {
+		let review = req.body.review;
+		let movie = req.body.movie;
+		console.log(review, "review");
+		console.log(movie, "MOVIE");
+		MongoUtils.postReview((x) => {
+			res.json({ status: 'OK' });
+		}, colName, review, movie);
 
-	let review= req.body.review
-	let movie= req.body.movie
-	console.log(review, "review")
-	console.log(movie, "MOVIE")
-	MongoUtils.postReview((x) => {
-		res.json({status:'OK'});
-	}, colName, review, movie);
-
-});
-/* GET movie detail */
-router.get("/:id", function (req, res) {
-	MongoUtils.findById((movie) => {
-		res.render("movie", { movie });
-	}, colName, req.params.id);
-});
-/* POST movie review */
-router.post("/:id/reviews", function (req, res) {
-
-	MongoUtils.findMany((list) => {
-		res.send(list);
-	}, colName);
-
-});
+	});
 
 module.exports = router;
 

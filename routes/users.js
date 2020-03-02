@@ -15,14 +15,64 @@ router.get("/", function (req, res) {
 router.get("/:username",
 	function (req, res) {
 		MongoUtils.findOne((user) => {
-			res.send(user);
+			let colName2 = "Movies";
+			let watched = user.watched;
+			user.watched = [];
+			let watching = user.watching;
+			user.watching = [];
+			let watchlist = user.watchlist;
+			user.watchlist = [];
+			let favs = user.favorites;
+			user.favorites = [];
+
+			let counter = favs.length + watched.length + watching.length + watchlist.length;
+			for (movieId of watched) {
+				MongoUtils.findById((movie) => {
+					user.watched.push(movie);
+					counter--;
+					if (counter == 0) res.render("user", { user });
+				},
+					colName2,
+					movieId
+				)
+			}
+			for (movieId of watching) {
+				MongoUtils.findById((movie) => {
+					user.watching.push(movie);
+					counter--;
+					if (counter == 0) res.render("user", { user });
+				},
+					colName2,
+					movieId
+				)
+			}
+			for (movieId of watchlist) {
+				MongoUtils.findById((movie) => {
+					user.watchlist.push(movie);
+					counter--;
+					if (counter == 0) res.render("user", { user });
+				},
+					colName2,
+					movieId
+				)
+			}
+			for (movieId of favs) {
+				MongoUtils.findById((movie) => {
+					user.favorites.push(movie);
+					counter--;
+					if (counter == 0) res.render("user", { user });
+				},
+					colName2,
+					movieId
+				)
+			}
 		},
 			colName,
 			{ username: req.params.username });
 	});
 
 router.put("/:username",
-	//auth.ensureAuthenticated, auth.confirmAuthorization, 
+	auth.ensureAuthenticated, auth.confirmAuthorization,
 	function (req, res) {
 		let movieId = req.body.movieId;
 		let listName = req.body.listName;
