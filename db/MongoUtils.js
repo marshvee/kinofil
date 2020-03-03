@@ -1,16 +1,11 @@
 const mongodb = require("mongodb");
 const fs = require("fs");
 
-process.env.usuario = "Mariana";
-process.env.clave = "desarrollouniandes2020";
-
 function MongoUtils() {
 
 	const mu = {},
 		dbName = "MoviesReviews",
 		uri = `mongodb+srv://${(process.env.usuario)}:${(process.env.clave)}@cluster0-h9ykn.mongodb.net/${dbName}?retryWrites=true&w=majority`;
-
-
 
 	mu.findMany = (cbk, colName, query) => {
 		const client = new mongodb.MongoClient(uri, { useNewUrlParser: true });
@@ -131,6 +126,7 @@ function MongoUtils() {
 		const client = new mongodb.MongoClient(uri, { useNewUrlParser: true });
 		client.connect(err => {
 			if (err) throw err;
+			console.log(update, "UPDATE");
 			console.log(object, "OBJECT");
 			if (object == undefined) {
 				throw new Error("Object can't be null or udefined");

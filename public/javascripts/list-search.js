@@ -24,9 +24,7 @@ const displayMovies = (movies) => {
 								</span>
 
 								<span class="movie-title card-title" id=${ idTitle}>${movie.title}</span>
-								
-								<a class="btn-floating halfway-fab waves-effect waves-light orange"><i
-										class="material-icons">add</i></a>
+
 							</div>
 						</div>
 					</a>

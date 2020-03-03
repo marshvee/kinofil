@@ -3,7 +3,6 @@ var router = express.Router();
 var auth = require("../auth/auth.js");
 
 module.exports = function (passport) {
-	/* GET users listing. */
 	router.get("/login", function (req, res) {
 		res.render("login", { message: req.flash("message") });
 	});
@@ -31,6 +30,10 @@ module.exports = function (passport) {
 	router.get("/logout", auth.ensureAuthenticated, function (req, res) {
 		req.logout();
 		res.redirect("/");
+	});
+
+	router.get("/profile", auth.ensureAuthenticated, function (req, res) {
+		res.redirect(`/users/${req.user.username}`);
 	});
 
 	return router;

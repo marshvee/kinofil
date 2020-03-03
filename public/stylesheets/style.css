@@ -13,7 +13,8 @@
 }
 
 .input-field .btn,
-.input-field .btn-floating {
+.input-field .btn-floating,
+.card-action .btn {
   background-color: #ff9800;
 }
 

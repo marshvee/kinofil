@@ -7,7 +7,7 @@ function toogleTitle(card, pDisplay) {
 	let num = card.id.split("-")[1];
 	let idTitle = "title-" + num;
 	let title = document.getElementById(idTitle);
-	title.style.opacity = pDisplay;
+	if (title) title.style.opacity = pDisplay;
 }
 
 function titles(path, opa) {
@@ -24,72 +24,71 @@ function titles(path, opa) {
 for (var movie of movies) {
 	movie.onmouseover = (e) => {
 		/*titles(e.path,'0');*/
-		toogleTitle(e.target,"0");
+		toogleTitle(e.target, "0");
 	};
-	movie.onmouseout = (e)=>{
+	movie.onmouseout = (e) => {
 		/*titles(e.path,'1');*/
-		toogleTitle(e.target,"1");
+		toogleTitle(e.target, "1");
 	};
 }
 
-$(document).ready(function(){
-    $('.modal').modal();
-  });
-	   
-var currentMovie=''
+$(document).ready(function () {
+	$('.modal').modal();
+});
 
-const clickModal=(e)=>{
-	let idButton=e.target.id;
-	let idMovie= idButton.split("-");
-	currentMovie=idMovie[1];
+var currentMovie = ''
+
+const clickModal = (e) => {
+	let idButton = e.target.id;
+	let idMovie = idButton.split("-");
+	currentMovie = idMovie[1];
 	console.log(currentMovie);
 }
 
-const reviewMovieStar=(e)=>{
-	let idstar= e.target.id;
-	let reviewV= idstar.split("-")[1]
+const reviewMovieStar = (e) => {
+	let idstar = e.target.id;
+	let reviewV = idstar.split("-")[1]
 	console.log(reviewV, currentMovie, 'ACAAAAAAAAAAAAAAA')
-	postData(`/movies/review/`, { movie: currentMovie, review:reviewV })
-  .then((data) => {
-    $('#modal1').modal('close');
-  });
+	postData(`/movies/review/`, { movie: currentMovie, review: reviewV })
+		.then((data) => {
+			$('#modal1').modal('close');
+		});
 
 }
 
-let reviews= document.getElementsByClassName("btn-floating halfway-fab");
+let reviews = document.getElementsByClassName("btn-floating halfway-fab");
 
 
-let stars= document.getElementsByClassName("star");
+let stars = document.getElementsByClassName("star");
 
-for (let star of stars){
-	star.onclick=reviewMovieStar;
+for (let star of stars) {
+	star.onclick = reviewMovieStar;
 }
 
-for (let reviewButton of reviews)
-{
-	reviewButton.onclick=clickModal;
+for (let reviewButton of reviews) {
+	reviewButton.onclick = clickModal;
 }
-  
-  $(document).ready(function(){
-    $('.tooltipped').tooltip();
-  });
+
+$(document).ready(function () {
+	$('.tooltipped').tooltip();
+});
 
 
 
-  async function postData(url = '', data = {}) {
+async function postData(url = '', data = {}) {
 	// Default options are marked with *
 	const response = await fetch(url, {
-	  method: 'POST', // *GET, POST, PUT, DELETE, etc.
-	  mode: 'cors', // no-cors, *cors, same-origin
-	  cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-	  credentials: 'same-origin', // include, *same-origin, omit
-	  headers: {
-		'Content-Type': 'application/json'
-		// 'Content-Type': 'application/x-www-form-urlencoded',
-	  },
-	  redirect: 'follow', // manual, *follow, error
-	  referrerPolicy: 'no-referrer', // no-referrer, *client
-	  body: JSON.stringify(data) // body data type must match "Content-Type" header
+		method: 'POST', // *GET, POST, PUT, DELETE, etc.
+		mode: 'cors', // no-cors, *cors, same-origin
+		cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+		credentials: 'same-origin', // include, *same-origin, omit
+		headers: {
+			'Content-Type': 'application/json'
+			// 'Content-Type': 'application/x-www-form-urlencoded',
+		},
+		redirect: 'follow', // manual, *follow, error
+		referrerPolicy: 'no-referrer', // no-referrer, *client
+		body: JSON.stringify(data) // body data type must match "Content-Type" header
 	});
 	return await response.json(); // parses JSON response into native JavaScript objects
-  }
+}
