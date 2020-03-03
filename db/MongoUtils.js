@@ -105,6 +105,24 @@ function MongoUtils() {
 		});
 	};
 
+	mu.postReview=(cbk, colName, review, movie)=>{
+		
+		const client = new mongodb.MongoClient(uri, { useNewUrlParser: true });
+
+		client.connect(err => {
+			if (err) throw err; 
+			const collection = client.db(dbName).collection(colName);
+			collection.updateOne({_id: new mongodb.ObjectID(movie)},{$push:{reviews:review}}, 
+				(err,result)=>{
+					if (err) throw err;
+					cbk(result);
+					client.close();
+				}
+				)
+			
+		});
+	}
+
 	return mu;
 
 }
