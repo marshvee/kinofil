@@ -22,8 +22,8 @@ If you want to deploy the project locally folloy this instructions:
 
  - Install node.js
  - Clone the repository
- - Create enviromental variable named "usuario", "clave" with your Mongo credentials and "secretkey" with your credentials 
- - Run the command for isntalling the dependencies `npm install`
+ - Create enviromental variable named "usuario", "clave" with your MongoDB Atlas credentials and "secretKey" with your credentials 
+ - Run the command for installing the dependencies `npm install`
  -  Run the command `npm start`
  - Go to `localhost:3000`on your browser
 
